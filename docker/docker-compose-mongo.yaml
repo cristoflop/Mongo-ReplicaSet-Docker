@@ -1,0 +1,38 @@
+version: '3.0'
+services:
+
+  mongo1:
+    image: mongo:4.2.12-bionic
+    ports:
+      - 27018:27017
+    environment:
+      - MONGO_INITDB_DATABASE=test
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes: 
+      - ./mongo1:/data/db
+    command: "--bind_ip_all --replSet hiperiondevelreplicaset"
+      
+  mongo2:
+    image: mongo:4.2.12-bionic
+    ports:
+      - 27019:27017
+    environment:
+      - MONGO_INITDB_DATABASE=test
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes: 
+      - ./mongo2:/data/db
+    command: "--bind_ip_all --replSet hiperiondevelreplicaset"
+    
+  mongo3:
+    image: mongo:4.2.12-bionic
+    ports:
+      - 27020:27017
+    environment:
+      - MONGO_INITDB_DATABASE=test
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes: 
+      - ./mongo3:/data/db
+    command: "--bind_ip_all --replSet hiperiondevelreplicaset"
