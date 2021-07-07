@@ -1,38 +1,43 @@
 version: '3.0'
 services:
-
+    
   mongo1:
-    image: mongo:4.2.12-bionic
+    image: docker.io/bitnami/mongodb:4.4
     ports:
       - 27018:27017
     environment:
-      - MONGO_INITDB_DATABASE=test
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=root
-    volumes: 
-      - ./mongo1:/data/db
-    command: --bind_ip_all --replSet hiperiondevelreplicaset
-      
+      - MONGODB_ADVERTISED_HOSTNAME=mongo1
+      - MONGODB_REPLICA_SET_MODE=primary
+      - MONGODB_REPLICA_SET_NAME=hiperiondevelreplicaset
+      - MONGODB_REPLICA_SET_KEY=HIPERIONDEVKEY
+      - MONGODB_ROOT_PASSWORD=root
+      - MONGODB_DATABASE=test
+    volumes:
+      - ./data/mongo:/bitnami/mongodb
+
   mongo2:
-    image: mongo:4.2.12-bionic
+    image: docker.io/bitnami/mongodb:4.4
     ports:
       - 27019:27017
     environment:
-      - MONGO_INITDB_DATABASE=test
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=root
-    volumes: 
-      - ./mongo2:/data/db
-    command: --bind_ip_all --replSet hiperiondevelreplicaset
-    
+      - MONGODB_ADVERTISED_HOSTNAME=mongo2
+      - MONGODB_REPLICA_SET_MODE=secondary
+      - MONGODB_REPLICA_SET_KEY=HIPERIONDEVKEY
+      - MONGODB_INITIAL_PRIMARY_HOST=mongo1
+      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=root
+    depends_on:
+      - mongo1
+
   mongo3:
-    image: mongo:4.2.12-bionic
+    image: docker.io/bitnami/mongodb:4.4
     ports:
       - 27020:27017
     environment:
-      - MONGO_INITDB_DATABASE=test
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=root
-    volumes: 
-      - ./mongo3:/data/db
-    command: --bind_ip_all --replSet hiperiondevelreplicaset
+      - MONGODB_ADVERTISED_HOSTNAME=mongo3
+      - MONGODB_REPLICA_SET_MODE=secondary
+      - MONGODB_REPLICA_SET_KEY=HIPERIONDEVKEY
+      - MONGODB_INITIAL_PRIMARY_HOST=mongo1
+      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=root
+    depends_on:
+      - mongo1
+  
