@@ -2,13 +2,11 @@ package com.mongo.connection.test;
 import java.text.ParseException;
 import java.util.stream.StreamSupport;
 
-// import org.bson.Document;
+import org.bson.Document;
 
-/*
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
-*/
 
 public class MongoDriverTest {
 
@@ -38,7 +36,7 @@ public class MongoDriverTest {
 		String url = createConnectionString();
 
 		try {
-/*
+
 			MongoClient mongo = MongoClients.create(url);
 
 			MongoDatabase db = mongo.getDatabase("admin");
@@ -59,7 +57,7 @@ public class MongoDriverTest {
 				System.out.println("    State: " + doc.getString("stateStr"));
 				System.out.println();
 			}
-*/
+
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
