@@ -11,7 +11,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=root
     volumes: 
       - ./mongo1:/data/db
-    command: "--bind_ip_all --replSet hiperiondevelreplicaset"
+    command: --bind_ip_all --replSet hiperiondevelreplicaset
       
   mongo2:
     image: mongo:4.2.12-bionic
@@ -23,7 +23,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=root
     volumes: 
       - ./mongo2:/data/db
-    command: "--bind_ip_all --replSet hiperiondevelreplicaset"
+    command: --bind_ip_all --replSet hiperiondevelreplicaset
     
   mongo3:
     image: mongo:4.2.12-bionic
@@ -35,4 +35,4 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=root
     volumes: 
       - ./mongo3:/data/db
-    command: "--bind_ip_all --replSet hiperiondevelreplicaset"
+    command: --bind_ip_all --replSet hiperiondevelreplicaset
